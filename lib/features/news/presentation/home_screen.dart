@@ -2,11 +2,12 @@ import 'package:demo_news_app/features/news/presentation/widgets/article_card.da
 import 'package:demo_news_app/features/news/presentation/widgets/category_chips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../core/widgets/error_view.dart';
 import '../../auth/presentation/screens/login_screen.dart';
 import '../../auth/providers/auth_provider.dart';
+import '../../favorites/presentation/screens/favorites_screen.dart';
 import '../providers/news_provider.dart';
+import 'article_details_screen.dart';
 
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -48,8 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // If the list is already on screen and a refresh/next page fails,
-    // show a snackbar instead of replacing the list with an error view.
+
     ref.listen<NewsFeedState>(newsFeedProvider, (prev, next) {
       if (next.error != null &&
           next.articles.isNotEmpty &&
@@ -66,6 +66,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         title: const Text('News'),
         actions: [
+          IconButton(
+            tooltip: 'Favorites',
+            icon: const Icon(Icons.favorite_border),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+            ),
+          ),
           IconButton(icon: const Icon(Icons.logout), onPressed: _logout),
         ],
       ),
@@ -115,8 +122,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           }
           return Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: ArticleCard(article: feed.articles[i]),
-            // onTap -> Article Detail (next step)
+        child: ArticleCard(
+          article: feed.articles[i],
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ArticleDetailScreen(article: feed.articles[i]),
+              ),
+            ),
+          ),
           );
         },
       ),
