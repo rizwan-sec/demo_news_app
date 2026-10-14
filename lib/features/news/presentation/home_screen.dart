@@ -6,6 +6,7 @@ import '../../../core/widgets/error_view.dart';
 import '../../auth/presentation/screens/login_screen.dart';
 import '../../auth/providers/auth_provider.dart';
 import '../../favorites/presentation/screens/favorites_screen.dart';
+import '../../search/presentation/screens/search_screen.dart';
 import '../providers/news_provider.dart';
 import 'article_details_screen.dart';
 
@@ -66,6 +67,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         title: const Text('News'),
         actions: [
+          IconButton(
+            tooltip: 'Search',
+            icon: const Icon(Icons.search),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const SearchScreen()),
+            ),
+          ),
           IconButton(
             tooltip: 'Favorites',
             icon: const Icon(Icons.favorite_border),
