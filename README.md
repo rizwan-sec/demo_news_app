@@ -1,16 +1,41 @@
-# demo_news_app
+# Demo News App
 
-A new Flutter project.
+A Flutter news application powered by NewsAPI.
 
-## Getting Started
+## Setup Instructions
 
-This project is a starting point for a Flutter application.
+### 1. Clone the repository
 
-A few resources to get you started if this is your first Flutter project:
+Clone this repository from GitHub and open it in your IDE.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 2. Configure the API key
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Create a file named `env.json` in the project root directory and add your News API key:
+
+```json
+{
+  "NEWS_API_KEY": "79819ab9d8224dac99ff48e07fb6f4e4"
+}
+```
+
+
+
+### 3. Install dependencies
+
+Run the following command from the project root:
+
+```bash
+flutter pub get
+```
+
+### 4. Run the application
+
+```bash
+flutter run --dart-define-from-file=env.json
+```
+
+## Requirements
+
+- Flutter SDK
+- Dart SDK
+- A valid NewsAPI key
